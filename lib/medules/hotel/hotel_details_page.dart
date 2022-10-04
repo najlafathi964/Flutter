@@ -17,12 +17,11 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('position $currentIndex');
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
               height: 350.h,
               width: double.maxFinite,
               child: Stack(alignment: Alignment.topLeft, children: [
@@ -31,7 +30,7 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                   children: [
                     CarouselSlider(
                       carouselController: carouselController,
-                      items: [
+                      items: const [
                         ClipRRect(
                           child: Image(
                             image: AssetImage(
@@ -47,14 +46,14 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                           viewportFraction: 1,
                           enableInfiniteScroll: true,
                           reverse: false,
-                          //   autoPlay: true,
-                          //      autoPlayInterval: Duration(seconds: 3) ,
-                          //     autoPlayAnimationDuration: Duration(seconds: 1) ,
-                          //     autoPlayCurve: Curves.fastOutSlowIn ,
+                            autoPlay: true,
+                               autoPlayInterval: const Duration(seconds: 3) ,
+                              autoPlayAnimationDuration: const Duration(seconds: 1) ,
+                              autoPlayCurve: Curves.fastOutSlowIn ,
                           scrollDirection: Axis.horizontal,
-                          onScrolled: (index) => setState(() {
-                                currentIndex = (index! - 10000.0).toInt();
-                              }),
+                          // onScrolled: (index) => setState(() {
+                          //       currentIndex = (index! - 10000.0).toInt();
+                          //     }),
                           onPageChanged: (index, reason) =>
                               setState(() => currentIndex = index)),
                     ),
@@ -65,8 +64,8 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                           position: currentIndex.toDouble(),
                           decorator: DotsDecorator(
                               activeColor: Colors.white,
-                              size: Size.square(9),
-                              activeSize: Size(18, 9),
+                              size: const Size.square(9),
+                              activeSize: const Size(18, 9),
                               activeShape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5)))),
                     ),
@@ -85,7 +84,7 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
               children: [
                 bigText(text: 'Platinum Grand', size: 20),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 Row(
                   children: [
@@ -93,43 +92,43 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                         text: 'Tokyo square, Japan ',
                         size: 14,
                         color: Colors.black),
-                    Text('-'),
+                    const Text('-'),
                     smallText(
                         text: '  Show in map', color: Colors.grey, size: 14)
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 smallText(
                     text:
                         'This upscale, contemporary hotel is 2 km from Hazrat Shahjalal International Airport and 11 km from Jatiyo Sangsad Bhaban,the Bangladesh Parliament complex.',
-                    color: Color(0xff8492A7),
+                    color: const Color(0xff8492A7),
                     size: 12),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
                         smallText(
                             text: 'Price', color: Color(0xff8492A7), size: 14),
                         SizedBox(
-                          height: 5,
+                          height: 5.h,
                         ),
                         smallText(text: '\$120', size: 14, color: Colors.black),
                       ],
                     ),
-                    Spacer(),
                     Column(
                       children: [
                         smallText(
                             text: 'Reviews',
-                            color: Color(0xff8492A7),
+                            color: const Color(0xff8492A7),
                             size: 14),
                         SizedBox(
-                          height: 5,
+                          height: 5.h,
                         ),
                         Row(
                           children: [
@@ -138,13 +137,13 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                             Wrap(
                               children: List.generate(4, (index) {
                                 if (index == 3) {
-                                  return Icon(
+                                  return const Icon(
                                     Icons.star_half,
                                     color: Colors.indigo,
                                     size: 14,
                                   );
                                 }
-                                return Icon(
+                                return const Icon(
                                   Icons.star,
                                   color: Colors.indigo,
                                   size: 14,
@@ -155,15 +154,14 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                         ),
                       ],
                     ),
-                    Spacer(),
                     Column(
                       children: [
                         smallText(
                             text: 'Recently booked',
-                            color: Color(0xff8492A7),
+                            color: const Color(0xff8492A7),
                             size: 14),
                         SizedBox(
-                          height: 5,
+                          height: 5.h,
                         ),
                         Wrap(
                           spacing: -8,
@@ -178,9 +176,9 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                                   ));
                             }
                             return CircleAvatar(
-                                radius: 10,
+                                radius: 10.r,
                                 backgroundImage:
-                                    AssetImage('assets/images/user_image.png'));
+                                    const AssetImage('assets/images/user_image.png'));
                           }),
                         ),
                       ],
@@ -188,11 +186,11 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 bigText(text: 'Aminities'),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,42 +198,42 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                     DetailsIcon(
                         image: 'assets/images/sports-car.svg', text: 'Parking'),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
                     DetailsIcon(image: 'assets/images/bath.svg', text: 'Bath'),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
                     DetailsIcon(
                         image: 'assets/images/glass-and-bottle.svg',
                         text: 'Bar'),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
                     DetailsIcon(image: 'assets/images/wifi.svg', text: 'Wifi'),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
                     DetailsIcon(image: 'assets/images/gym.svg', text: 'Gym'),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
                     DetailsIcon(image: 'assets/images/more.svg', text: 'More'),
                   ],
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 30.h,
                 ),
                 Row(
                   children: [
                     Material(
-                      shadowColor: Color(0x707070),
-                      borderRadius: BorderRadius.circular(10),
+                      shadowColor: const Color(0x00707070),
+                      borderRadius: BorderRadius.circular(10.r),
                       elevation: 5,
                       child: SizedBox(
                           width: 55.w,
                           height: 55.h,
-                          child: Center(
+                          child: const Center(
                               child: Icon(
                             Icons.favorite_border,
                             size: 24,
@@ -244,16 +242,16 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                     ),
                     Spacer(),
                     Material(
-                      shadowColor: Color(0x707070),
-                      borderRadius: BorderRadius.circular(10),
+                      shadowColor: const Color(0x00707070),
+                      borderRadius: BorderRadius.circular(10.r),
                       elevation: 5,
                       child: Container(
                           height: 55.h,
                           width: 250.w,
                           decoration: BoxDecoration(
                               color: Colors.indigo,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(
+                              borderRadius: BorderRadius.circular(12.r)),
+                          child: const Center(
                               child: Text(
                             'Book now',
                             style: TextStyle(color: Colors.white),
@@ -273,22 +271,22 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
     return Column(
       children: [
         Material(
-          shadowColor: Color(0x707070),
+          shadowColor: const Color(0x00707070),
           borderRadius: BorderRadius.circular(10),
           elevation: 5,
           child: SizedBox(
             width: 30.w,
             height: 30.h,
             child: SvgPicture.asset(
-              '$image',
+              image,
               fit: BoxFit.none,
             ),
           ),
         ),
         SizedBox(
-          height: 10,
+          height: 10.h,
         ),
-        smallText(text: text, color: Color(0xff8492A7))
+        smallText(text: text, color: const Color(0xff8492A7))
       ],
     );
   }

@@ -33,7 +33,7 @@ class HotalHomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,7 +47,7 @@ class HotalHomePage extends StatelessWidget {
                           color: Colors.grey,
                           size: 16),
                       SizedBox(
-                        height: 10,
+                        height: 10.h,
                       ),
                       bigText(text: 'Find your hotel', size: 24)
                     ],
@@ -62,7 +62,7 @@ class HotalHomePage extends StatelessWidget {
                         shadowColor: Colors.grey,
                         borderRadius: BorderRadius.circular(20),
                         child:  Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   fit: BoxFit.fill,
                                   image: AssetImage('assets/images/user_image.png'))),
@@ -76,8 +76,8 @@ class HotalHomePage extends StatelessWidget {
               Material(
                   elevation: 10,
                   borderRadius: BorderRadius.circular(12),
-                  shadowColor: Color(0x55434343),
-                  child: TextField(
+                  shadowColor: const Color(0x55434343),
+                  child: const TextField(
                     textAlign: TextAlign.start,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
@@ -102,7 +102,7 @@ class HotalHomePage extends StatelessWidget {
                   height: 210.h,
                   width: double.maxFinite,
                   child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       itemBuilder: (context, index) => PopularHotelsListItem(image: hotelsImages[index] ,
@@ -116,7 +116,7 @@ class HotalHomePage extends StatelessWidget {
                 height: 20.h,
               ),
               ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 2,
                   itemBuilder: (context, index) => HotPackagesListItem(image: packageImages[index] ,
@@ -136,9 +136,9 @@ class HotalHomePage extends StatelessWidget {
     return Container(
       width: 135.w,
       height: 210.h,
-      margin: EdgeInsetsDirectional.only(end: 20, bottom: 30),
+      margin: EdgeInsetsDirectional.only(end: 20.w, bottom: 30.h),
       child: Material(
-        shadowColor: Color(0x707070),
+        shadowColor: const Color(0x00707070),
         borderRadius: BorderRadius.circular(20),
         elevation: 5,
         child: Column(
@@ -149,21 +149,21 @@ class HotalHomePage extends StatelessWidget {
               height: 120.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadiusDirectional.only(
-                      topStart: Radius.circular(20),
-                      topEnd: Radius.circular(20)),
+                      topStart: Radius.circular(20.r),
+                      topEnd: Radius.circular(20.r)),
                   color: Colors.white38,
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('$image'))),
+                      image: AssetImage(image))),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  bigText(text: '$name', size: 12),
+                  bigText(text: name, size: 12),
                   smallText(
-                    text: '$location',
+                    text: location,
                     size: 10,
                     color: Colors.grey,
                   ),
@@ -171,11 +171,10 @@ class HotalHomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       smallText(
-                          text: '$price',
+                          text: price,
                           color: Colors.indigo,size: 10),
-                      Spacer(),
                       Row(
-                        children: [
+                        children: const [
                           Text(
                             '4.5',
                             style:
@@ -201,10 +200,10 @@ class HotalHomePage extends StatelessWidget {
 
   Widget HotPackagesListItem({required String image , required String name , required String location , required bool isBook}) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 10.h),
       child: Material(
-        shadowColor: Color(0x707070),
-        borderRadius: BorderRadius.circular(20),
+        shadowColor: const Color(0x00707070),
+        borderRadius: BorderRadius.circular(20.r),
         elevation: 5,
         child: Row(
           children: [
@@ -212,49 +211,48 @@ class HotalHomePage extends StatelessWidget {
               width: 98.w,
               height: 124.h,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadiusDirectional.only(
-                      topStart: Radius.circular(20),
-                      bottomStart: Radius.circular(20)),
+                  borderRadius:  BorderRadiusDirectional.only(
+                      topStart: Radius.circular(20.r),
+                      bottomStart: Radius.circular(20.r)),
                   color: Colors.white38,
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('$image'))),
+                      image: AssetImage(image))),
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                height: 124,
-                // width: Dimenstions.ListTextContainerWidth ,
+                padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                height: 124.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.only(
-                        topEnd: Radius.circular(20),
-                        bottomEnd: Radius.circular(20)),
+                        topEnd: Radius.circular(20.r),
+                        bottomEnd: Radius.circular(20.r)),
                     color: Colors.white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    bigText(text: '$name' , size: 16),
+                    bigText(text: name , size: 16),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.location_on_outlined,
                           size: 10,
                         ),
-                        smallText(text: '$location' , color: Colors.grey , size: 12),
+                        smallText(text: location , color: Colors.grey , size: 12),
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     smallText(
                         text: '\$180/night',
                         color: Colors.indigo,size: 10),
                     SizedBox(
-                      height: 15,
+                      height: 15.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -264,7 +262,7 @@ class HotalHomePage extends StatelessWidget {
                           color: isBook?Colors.indigo : Colors.green,
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         SvgPicture.asset(
                           'assets/images/bath.svg',
@@ -272,7 +270,7 @@ class HotalHomePage extends StatelessWidget {
 
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         SvgPicture.asset(
                           'assets/images/glass-and-bottle.svg',
@@ -280,7 +278,7 @@ class HotalHomePage extends StatelessWidget {
 
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         ),
                         SvgPicture.asset(
                           'assets/images/wifi.svg',
@@ -288,7 +286,7 @@ class HotalHomePage extends StatelessWidget {
 
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 10.w,
                         )
                       ],
                     )
@@ -299,7 +297,7 @@ class HotalHomePage extends StatelessWidget {
             RotatedBox(
               quarterTurns: 3,
               child: Container(
-                margin: EdgeInsetsDirectional.only(bottom: 10),
+                margin: EdgeInsetsDirectional.only(bottom: 10.h),
                   height: 47.h,
                   width: 105.w,
                   decoration: BoxDecoration(
@@ -308,7 +306,7 @@ class HotalHomePage extends StatelessWidget {
                   child: Center(
                       child: Text(
                     isBook?'Book now':'',
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ))),
             )
           ],
