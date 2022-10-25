@@ -1,4 +1,5 @@
-import 'package:course/medules/hotel/hotel_details_page.dart';
+
+import 'package:course/medules/routes/first_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,12 +19,13 @@ class MyApp extends StatelessWidget {
       builder: (context,child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Course',
-          theme: ThemeData(
-
-            primarySwatch: Colors.blue,
-          ),
-          home:  HotelDetailsPage(),
+         home:  FirstScreen(),
+        //  initialRoute: '/firstScreen',
+        //  routes: {
+        //    '/firstScreen' : (context)=>FirstScreen() ,
+        //    '/secondScreen' : (context) => SecondScreen(),
+        //    '/thirdScreen' : (context) => ThirdScreen(),
+        //  },
         );
       }
     );

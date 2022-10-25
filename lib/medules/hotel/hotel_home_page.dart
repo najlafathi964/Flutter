@@ -1,28 +1,45 @@
+import 'package:course/model/hotel_model.dart';
+import 'package:course/medules/hotel/hotel_details_page.dart';
 import 'package:course/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HotalHomePage extends StatelessWidget {
+class HotelHomePage extends StatefulWidget {
+  @override
+  State<HotelHomePage> createState() => _HotelHomePageState();
+}
+
+class _HotelHomePageState extends State<HotelHomePage> {
   List<String> hotelsImages = [
 'assets/images/apartment-bed.png' ,
 'assets/images/bed-bedroom.png' ,
         'assets/images/bedroom-hotels.png'
           ];
+
   List<String> hotelsName = ['Sultans dine' , 'Radison blue' , 'Queen hotel'] ;
+
   List<String> hotelsLocation = ['Kingdom Tower, Brazil ' , 'Tokyo square, Japan' , 'Kingdom Tower, Brazil'] ;
+
   List<String> hotelsPricePerNaight = ['\$180/night' , '\$180/night' , '\$180/night'] ;
 
-  List<String> packageImages = [
+  /*List<String> packageImages = [
       'assets/images/derick-mckinney.png' ,
       'assets/images/ialicante-mediterranean-homes.png'
   ];
+
   List<String> packagesName = ['The westin dhaka' , 'Platinum Grand'] ;
-  List<String> packagesLocation = ['Kensington palace ' , 'Kensington palace' ] ;
-  List<bool> isBook =[true,false] ;
 
+  List<String> packagesLocation = ['Kensington palace ' , 'Kensington palace' ] ;*/
 
-
+  List<HotelModel> hotelList = [
+    HotelModel(id: 1 , name: 'The westin dhaka',location:'Kensington palace' ,info:'This upscale, contemporary hotel is 2 km from Hazrat Shahjalal International Airport and 11 km from Jatiyo Sangsad Bhaban,the Bangladesh Parliament complex.',
+      price: '\$180/night' , image:'assets/images/derick-mckinney.png' , isBooked: false
+    ) ,
+    HotelModel(id: 2 , name: 'Platinum Grand',location:'Kensington palace' ,info:'This upscale, contemporary hotel is 2 km from Hazrat Shahjalal International Airport and 11 km from Jatiyo Sangsad Bhaban,the Bangladesh Parliament complex.',
+        price: '\$180/night' , image:'assets/images/ialicante-mediterranean-homes.png' , isBooked: true
+    )
+  ] ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +73,7 @@ class HotalHomePage extends StatelessWidget {
                   Container(
                     width: 42.w,
                     height: 42.h,
-                   
+
                     child: Material(
                         elevation: 10,
                         shadowColor: Colors.grey,
@@ -119,8 +136,22 @@ class HotalHomePage extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 2,
-                  itemBuilder: (context, index) => HotPackagesListItem(image: packageImages[index] ,
-                  name: packagesName[index] , location: packagesLocation[index] , isBook: isBook[index])),
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () async{
+                       bool isFav = await Navigator.push(context,MaterialPageRoute(builder: (context){
+                          return HotelDetailsPage(hotelModel: hotelList[index],);
+
+                        }));
+                        setState(() {
+                          hotelList[index].isFav = isFav ;
+                        });
+
+
+                    },
+                    child: HotPackagesListItem(context:context ,image: hotelList[index].image! ,
+                    name:  hotelList[index].name! , location:  hotelList[index].location!,
+                        isBook:hotelList[index].isBooked , isFav: hotelList[index].isFav),
+                  )),
             ],
           ),
         ),
@@ -198,7 +229,7 @@ class HotalHomePage extends StatelessWidget {
     );
   }
 
-  Widget HotPackagesListItem({required String image , required String name , required String location , required bool isBook}) {
+  Widget HotPackagesListItem({required BuildContext context ,required String image , required String name , required String location , required bool isBook , required bool isFav}) {
     return Container(
       margin: EdgeInsets.only(bottom: 10.h),
       child: Material(
@@ -232,7 +263,17 @@ class HotalHomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    bigText(text: name , size: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        bigText(text: name , size: 16),
+                        Icon(
+                          isFav ?Icons.favorite : Icons.favorite_border,
+                          color: Colors.indigo,
+                          size: 20,
+                        )
+                      ],
+                    ),
                     SizedBox(
                       height: 5.h,
                     ),
@@ -305,7 +346,7 @@ class HotalHomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12)),
                   child: Center(
                       child: Text(
-                    isBook?'Book now':'',
+                    isBook?'':'Book now',
                     style: const TextStyle(color: Colors.white),
                   ))),
             )

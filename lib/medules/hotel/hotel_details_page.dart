@@ -4,19 +4,26 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:course/model/hotel_model.dart';
 
 class HotelDetailsPage extends StatefulWidget {
+  HotelModel? hotelModel ;
+  HotelDetailsPage({Key? key ,this.hotelModel });
   @override
-  State<HotelDetailsPage> createState() => _HotelDetailsPageState();
+  State<HotelDetailsPage> createState() => _HotelDetailsPageState(hotelModel);
 }
 
 class _HotelDetailsPageState extends State<HotelDetailsPage> {
+  HotelModel? hotelModel ;
+  _HotelDetailsPageState(this.hotelModel);
+
   CarouselController carouselController = CarouselController();
 
   var currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,14 +37,32 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                   children: [
                     CarouselSlider(
                       carouselController: carouselController,
-                      items: const [
+                      items:  [
+
                         ClipRRect(
                           child: Image(
-                            image: AssetImage(
-                                'assets/images/valeriia-bugaiova.png'),
+                             image: AssetImage(
+                               'assets/images/valeriia-bugaiova.png'),
                             width: double.infinity,
                             fit: BoxFit.fill,
                           ),
+
+                        ) ,
+                        ClipRRect(
+                          child: Image(
+                            image: AssetImage('${hotelModel?.image}'),
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ) ,
+                        ClipRRect(
+                          child: Image(
+                            image: AssetImage(
+                                'assets/images/bed-bedroom.png'),
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+
                         )
                       ],
                       options: CarouselOptions(
@@ -74,7 +99,11 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                 Positioned(
                   top: 60.h,
                   left: 20.w,
-                  child: AppIcon(icon: Icons.arrow_back_ios),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context ,hotelModel!.isFav);
+                    },
+                      child: AppIcon(icon: Icons.arrow_back_ios)),
                 )
               ])),
           Padding(
@@ -82,14 +111,14 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                bigText(text: 'Platinum Grand', size: 20),
+                bigText(text: '${hotelModel?.name}', size: 20),
                 SizedBox(
                   height: 5.h,
                 ),
                 Row(
                   children: [
                     smallText(
-                        text: 'Tokyo square, Japan ',
+                        text: '${hotelModel?.location}',
                         size: 14,
                         color: Colors.black),
                     const Text('-'),
@@ -102,8 +131,8 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                 ),
                 smallText(
                     text:
-                        'This upscale, contemporary hotel is 2 km from Hazrat Shahjalal International Airport and 11 km from Jatiyo Sangsad Bhaban,the Bangladesh Parliament complex.',
-                    color: const Color(0xff8492A7),
+                    '${hotelModel?.info}'
+,                    color: const Color(0xff8492A7),
                     size: 12),
                 SizedBox(
                   height: 20.h,
@@ -118,7 +147,7 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        smallText(text: '\$120', size: 14, color: Colors.black),
+                        smallText(text: '${hotelModel?.price}', size: 14, color: Colors.black),
                       ],
                     ),
                     Column(
@@ -226,19 +255,26 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                 ),
                 Row(
                   children: [
-                    Material(
-                      shadowColor: const Color(0x00707070),
-                      borderRadius: BorderRadius.circular(10.r),
-                      elevation: 5,
-                      child: SizedBox(
-                          width: 55.w,
-                          height: 55.h,
-                          child: const Center(
-                              child: Icon(
-                            Icons.favorite_border,
-                            size: 24,
-                            color: Colors.indigo,
-                          ))),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          hotelModel!.isFav = !hotelModel!.isFav ;
+                        });
+                      },
+                      child: Material(
+                        shadowColor: const Color(0x00707070),
+                        borderRadius: BorderRadius.circular(10.r),
+                        elevation: 5,
+                        child: SizedBox(
+                            width: 55.w,
+                            height: 55.h,
+                            child:  Center(
+                                child: Icon(
+                              hotelModel!.isFav ?Icons.favorite : Icons.favorite_border,
+                              size: 24,
+                              color: Colors.indigo,
+                            ))),
+                      ),
                     ),
                     Spacer(),
                     Material(
@@ -249,7 +285,7 @@ class _HotelDetailsPageState extends State<HotelDetailsPage> {
                           height: 55.h,
                           width: 250.w,
                           decoration: BoxDecoration(
-                              color: Colors.indigo,
+                              color:hotelModel!.isBooked? Theme.of(context).disabledColor : Colors.indigo,
                               borderRadius: BorderRadius.circular(12.r)),
                           child: const Center(
                               child: Text(
